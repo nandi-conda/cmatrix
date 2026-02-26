@@ -1,0 +1,22 @@
+package:
+  name: cmatrix
+  version: "2.0"
+
+source:
+  path: .
+
+build:
+  number: 0
+  script: |
+    cmake -B build -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+    cmake --build build --target install
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - cmake
+    - make
+  host:
+    - ncurses
+
+

@@ -1,0 +1,31 @@
+name: Build and Upload with rattler-build
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  CHANNEL: nandi-testing
+
+jobs:
+  build:
+    name: Build and Upload
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build with rattler-build
+        uses: prefix-dev/rattler-build-action@v1
+        with:
+          recipe-path: recipe.yaml
+          package-dir: output
+
+      - name: Upload to prefix.dev
+        uses: prefix-dev/rattler-build-action@v1
+        with:
+          command: upload
+          args: prefix -c ${{ env.CHANNEL }} output/linux-64/*.conda
+        env:
+          PREFIX_API_KEY: ${{ secrets.PREFIX_API_KEY }}
