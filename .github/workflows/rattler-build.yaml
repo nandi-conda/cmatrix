@@ -22,9 +22,18 @@ jobs:
           recipe-path: recipe.yaml
 
       - name: Upload to prefix.dev
-        uses: prefix-dev/rattler-build-action@v0.2.34
-        with:
-          command: upload
-          args: prefix -c ${{ env.CHANNEL }} output/linux-64/*.conda
+        shell: bash
+        run: |
+          # Download rattler-build
+          arch=$(uname -m)
+          if [ "$arch" = "arm64" ]; then
+            arch="aarch64"
+          fi
+          platform=unknown-linux-musl
+          curl -Ls "https://github.com/prefix-dev/rattler-build/releases/latest/download/rattler-build-$arch-$platform" -o rattler-build
+          chmod +x rattler-build
+          
+          # Upload package
+          ./rattler-build upload prefix -c ${{ env.CHANNEL }} output/linux-64/*.conda
         env:
           PREFIX_API_KEY: ${{ secrets.PREFIX_API_KEY }}
