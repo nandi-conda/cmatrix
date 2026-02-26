@@ -33,7 +33,7 @@ jobs:
           curl -Ls "https://github.com/prefix-dev/rattler-build/releases/latest/download/rattler-build-$arch-$platform" -o rattler-build
           chmod +x rattler-build
           
-          # Upload package
-          ./rattler-build upload prefix -c ${{ env.CHANNEL }} output/linux-64/*.conda
+          # Upload package (skip if already exists, force overwrite with --force if needed)
+          ./rattler-build upload prefix -c ${{ env.CHANNEL }} output/linux-64/*.conda --skip-existing
         env:
           PREFIX_API_KEY: ${{ secrets.PREFIX_API_KEY }}
