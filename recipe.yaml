@@ -6,10 +6,12 @@ source:
   path: .
 
 build:
-  number: 0
+  number: 2
   script: |
-    cmake -B build -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+    export CFLAGS="${CFLAGS} -march=x86-64 -mtune=generic"
+    cmake -B build -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_C_FLAGS="$CFLAGS"
     cmake --build build --target install
+    ${OBJCOPY:-objcopy} --remove-section .note.gnu.property "$PREFIX/bin/cmatrix"
 
 requirements:
   build:
