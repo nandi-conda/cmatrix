@@ -39,6 +39,10 @@
 
         defaultPackage = self.packages.${system}.cmatrix;
 
+        checks = {
+          build = self.packages.${system}.cmatrix;
+        };
+
         devShell = pkgs.mkShell {
           buildInputs = [ pkgs.cmake pkgs.ncurses ];
         };
