@@ -1,6 +1,11 @@
 {
   description = "cmatrix - A terminal based 'The Matrix' like screen saver";
 
+  nixConfig = {
+    extra-substituters = [ "https://codegod100.cachix.org" ];
+    extra-trusted-public-keys = [ "codegod100.cachix.org-1:7NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
+  };
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
