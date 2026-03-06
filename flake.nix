@@ -2,8 +2,8 @@
   description = "cmatrix - A terminal based 'The Matrix' like screen saver";
 
   nixConfig = {
-    extra-substituters = [ "https://codegod100.cachix.org" ];
-    extra-trusted-public-keys = [ "codegod100.cachix.org-1:7NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
+    extra-substituters = [ "https://cache.garnix.io" ];
+    extra-trusted-public-keys = [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
   };
 
   inputs = {
